@@ -5,8 +5,9 @@ function [ Result ] = mutli_targ_prim_rob_qilp( num_robot, num_primitive, num_ta
     c_    = zeros(1, length_x);  % check onenote for description
     Name = 'Multi Targ Prim Rob MIQP';
     
-    F = zeros(length_x, length_x);
+    F = sparse(length_x,length_x);%zeros(length_x, length_x);
     cnt  = (num_primitive*num_robot +1);
+    C = sparse(C);
     for t = 1:num_target
         for r = 1:num_robot
             mark_ind = ((r-1)*num_primitive+1); % useful variable to scissor out data from C, check onenote
@@ -22,7 +23,7 @@ function [ Result ] = mutli_targ_prim_rob_qilp( num_robot, num_primitive, num_ta
    F = -F_sym;
     
     
-    A_ = zeros(length_x, length_x);
+    A_ = sparse(length_x,length_x);%zeros(length_x, length_x);
     
     for r = 1:num_robot
         mark_ind = (r-1)*num_primitive+1;
